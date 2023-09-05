@@ -6,5 +6,6 @@ namespace PhanMemGhiDanh.Data
     {
         public string FisrtNameUser { get; set; } = null!;
         public string LastNameUser { get; set; } = null!;
+
     }
 }

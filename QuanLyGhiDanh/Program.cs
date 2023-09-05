@@ -1,12 +1,39 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PhanMemGhiDanh.Data;
+using QuanLyGhiDanh.Services;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+
+
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+
+
+builder.Services.AddAutoMapper(typeof(Program));
+
+builder.Services.AddIdentity<User, IdentityRole>()
+    .AddEntityFrameworkStores<GhiDanhDbContext>().AddDefaultTokenProviders();
+
+
+builder.Services.AddScoped<IAccountService, AccountService>();
+
+
+builder.Services.AddDbContext<GhiDanhDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("GhiDanh"));
+});
+
 
 builder.Services.AddAuthentication(options =>
 {
@@ -28,15 +55,6 @@ builder.Services.AddAuthentication(options =>
 
 });
 
-builder.Services.AddDbContext<GhiDanhDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("GhiDanh"));
-});
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
 policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod())
