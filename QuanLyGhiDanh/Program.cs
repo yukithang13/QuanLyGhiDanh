@@ -1,8 +1,9 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PhanMemGhiDanh.Data;
+using QuanLyGhiDanh.Interface;
 using QuanLyGhiDanh.Services;
 using System.Text;
 
@@ -20,19 +21,39 @@ builder.Services.AddSwaggerGen();
 
 
 
-builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<GhiDanhDbContext>().AddDefaultTokenProviders();
 
-
 builder.Services.AddScoped<IAccountService, AccountService>();
-
 
 builder.Services.AddDbContext<GhiDanhDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("GhiDanh"));
 });
+//--------------------------------------------------------------------------------------------------
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/SignIn"; // Đường dẫn đến trang đăng nhập
+    options.AccessDeniedPath = "/Account/AccessDenied"; // Đường dẫn khi truy cập bị từ chối
+});
+
+//--------------------------------------------------------------------------------------------------
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireUserRole", policy =>
+        policy.RequireRole("User"));
+
+    options.AddPolicy("RequireAdminRole", policy =>
+        policy.RequireRole("AdminRole"));
+
+    // Add role here....
+
+});
+
+//--------------------------------------------------------------------------------------------------
+
 
 
 builder.Services.AddAuthentication(options =>

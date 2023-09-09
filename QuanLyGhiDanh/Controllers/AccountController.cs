@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using QuanLyGhiDanh.Interface;
 using QuanLyGhiDanh.Models;
-using QuanLyGhiDanh.Services;
 
 namespace QuanLyGhiDanh.Controllers
 {

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace QuanLyGhiDanh.Controllers
 {
@@ -7,5 +6,6 @@ namespace QuanLyGhiDanh.Controllers
     [ApiController]
     public class AdminController : ControllerBase
     {
+
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using QuanLyGhiDanh.Models;
 
-namespace QuanLyGhiDanh.Services
+namespace QuanLyGhiDanh.Interface
 {
     public interface IAccountService
     {

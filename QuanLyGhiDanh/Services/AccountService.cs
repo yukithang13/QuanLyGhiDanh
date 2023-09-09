@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using PhanMemGhiDanh.Data;
+using QuanLyGhiDanh.Interface;
 using QuanLyGhiDanh.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -22,12 +23,13 @@ namespace QuanLyGhiDanh.Services
             this.configuration = configuration;
         }
 
+
+
         public async Task<string> DangNhapAsync(DangNhapModel model)
         {
-            var result = await signInManager.PasswordSignInAsync
-                (model.Email, model.Password, false, false);
+            var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
 
-            if (result.Succeeded)
+            if (!result.Succeeded)
             {
                 return string.Empty;
             }
@@ -40,14 +42,13 @@ namespace QuanLyGhiDanh.Services
 
             var authenKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]));
 
-            var token = new JwtSecurityToken
-                (
+            var token = new JwtSecurityToken(
                 issuer: configuration["JWT:ValidIssuer"],
                 audience: configuration["JWT:ValidAudience"],
-                expires: DateTime.Now.AddDays(1),
+                expires: DateTime.Now.AddMinutes(20),
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authenKey, SecurityAlgorithms.HmacSha512Signature)
-                );
+            );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
 
