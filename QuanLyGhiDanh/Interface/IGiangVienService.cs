@@ -1,6 +1,14 @@
-﻿namespace QuanLyGhiDanh.Interface
+﻿using QuanLyGhiDanh.Models;
+
+namespace QuanLyGhiDanh.Interface
 {
     public interface IGiangVienService
     {
+
+        Task<GiangVienModel> GetGiangVienByIdAsync(int id);
+        Task<List<GiangVienModel>> GetAllGiangVienByAsync();
+        Task<int> AddGiangVienAsync(GiangVienModel giangvienmodoel);
+        Task DeleteGiangVienAsync(int id);
+        Task UpdateGiangVienAsync(int id, GiangVienModel giangvienmodel);
     }
 }

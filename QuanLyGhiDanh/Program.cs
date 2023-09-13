@@ -26,6 +26,7 @@ builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<GhiDanhDbContext>().AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IGiangVienService, GiangVienService>();
 
 builder.Services.AddDbContext<GhiDanhDbContext>(options =>
 {
@@ -45,6 +46,9 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("RequireUserRole", policy =>
         policy.RequireRole("User"));
 
+    options.AddPolicy("RequireUserRole", policy =>
+        policy.RequireRole("Teacher"));
+
     options.AddPolicy("RequireAdminRole", policy =>
         policy.RequireRole("AdminRole"));
 
@@ -54,7 +58,7 @@ builder.Services.AddAuthorization(options =>
 
 //--------------------------------------------------------------------------------------------------
 
-
+builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddAuthentication(options =>
 {
