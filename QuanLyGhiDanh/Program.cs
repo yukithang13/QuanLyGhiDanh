@@ -25,8 +25,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<GhiDanhDbContext>().AddDefaultTokenProviders();
 
+
+builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IGiangVienService, GiangVienService>();
+builder.Services.AddScoped<IHocVienService, HocVienService>();
+
 
 builder.Services.AddDbContext<GhiDanhDbContext>(options =>
 {
@@ -58,7 +62,7 @@ builder.Services.AddAuthorization(options =>
 
 //--------------------------------------------------------------------------------------------------
 
-builder.Services.AddAutoMapper(typeof(Program));
+
 
 builder.Services.AddAuthentication(options =>
 {

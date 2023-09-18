@@ -8,7 +8,7 @@ namespace QuanLyGhiDanh.Helpers
     {
         public Mapper()
         {
-            CreateMap<GiangVien, GiangVienModel>();
+            CreateMap<GiangVien, GiangVienModel>().ReverseMap(); ;
         }
     }
 }

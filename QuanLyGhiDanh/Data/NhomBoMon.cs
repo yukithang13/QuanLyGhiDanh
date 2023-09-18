@@ -8,7 +8,7 @@ namespace PhanMemGhiDanh.Data
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid IdNhomBoMon { get; set; }
+        public int IdNhomBoMon { get; set; }
         public string? TenNhomBoMon { get; set; }
     }
 }

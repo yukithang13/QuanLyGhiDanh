@@ -17,7 +17,7 @@ namespace QuanLyGhiDanh.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.21")
+                .HasAnnotation("ProductVersion", "7.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -189,7 +189,7 @@ namespace QuanLyGhiDanh.Migrations
 
                     b.HasKey("IdGiangVien");
 
-                    b.ToTable("Giangviens");
+                    b.ToTable("Giangviens", (string)null);
                 });
 
             modelBuilder.Entity("PhanMemGhiDanh.Data.HocVien", b =>
@@ -220,7 +220,7 @@ namespace QuanLyGhiDanh.Migrations
 
                     b.HasKey("IdHocVien");
 
-                    b.ToTable("HocViens");
+                    b.ToTable("HocViens", (string)null);
                 });
 
             modelBuilder.Entity("PhanMemGhiDanh.Data.KhoaHoc", b =>
@@ -236,7 +236,7 @@ namespace QuanLyGhiDanh.Migrations
 
                     b.HasKey("IdKhoaHoc");
 
-                    b.ToTable("Khoahocs");
+                    b.ToTable("Khoahocs", (string)null);
                 });
 
             modelBuilder.Entity("PhanMemGhiDanh.Data.LopHoc", b =>
@@ -270,7 +270,7 @@ namespace QuanLyGhiDanh.Migrations
 
                     b.HasKey("IdLopHoc");
 
-                    b.ToTable("LopHocs");
+                    b.ToTable("LopHocs", (string)null);
                 });
 
             modelBuilder.Entity("PhanMemGhiDanh.Data.Monhoc", b =>
@@ -290,8 +290,8 @@ namespace QuanLyGhiDanh.Migrations
                     b.Property<int?>("KhoahocIdKhoaHoc")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("NhomBoMonIdNhomBoMon")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("NhomBoMonIdNhomBoMon")
+                        .HasColumnType("int");
 
                     b.Property<string>("TenMon")
                         .HasColumnType("nvarchar(max)");
@@ -302,21 +302,23 @@ namespace QuanLyGhiDanh.Migrations
 
                     b.HasIndex("NhomBoMonIdNhomBoMon");
 
-                    b.ToTable("Monhocs");
+                    b.ToTable("Monhocs", (string)null);
                 });
 
             modelBuilder.Entity("PhanMemGhiDanh.Data.NhomBoMon", b =>
                 {
-                    b.Property<Guid>("IdNhomBoMon")
+                    b.Property<int>("IdNhomBoMon")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdNhomBoMon"), 1L, 1);
 
                     b.Property<string>("TenNhomBoMon")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdNhomBoMon");
 
-                    b.ToTable("NhomBoMons");
+                    b.ToTable("NhomBoMons", (string)null);
                 });
 
             modelBuilder.Entity("PhanMemGhiDanh.Data.User", b =>
