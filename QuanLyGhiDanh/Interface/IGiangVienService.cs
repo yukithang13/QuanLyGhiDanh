@@ -7,7 +7,7 @@ namespace QuanLyGhiDanh.Interface
 
         Task<GiangVienModel> GetGiangVienByIdAsync(int id);
         Task<List<GiangVienModel>> GetAllGiangVienByAsync();
-        Task<int> AddGiangVienAsync(GiangVienModel giangvienmodoel);
+        Task<int> AddGiangVienAsync(GiangVienModel giangvienmodel);
         Task DeleteGiangVienAsync(int id);
         Task UpdateGiangVienAsync(int id, GiangVienModel giangvienmodel);
     }

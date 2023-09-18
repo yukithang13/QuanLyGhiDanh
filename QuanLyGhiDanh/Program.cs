@@ -30,6 +30,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IGiangVienService, GiangVienService>();
 builder.Services.AddScoped<IHocVienService, HocVienService>();
+builder.Services.AddScoped<IKhoaHocService, KhoaHocService>();
 
 
 builder.Services.AddDbContext<GhiDanhDbContext>(options =>

@@ -41,7 +41,7 @@ namespace QuanLyGhiDanh.Controllers
         {
             var newHV = await _hocvienServ.AddHocVienAsync(hocvienmodel);
             var hv = await _hocvienServ.GetHocVienByIdAsync(newHV);
-            return gv == null ? NotFound() : Ok(hv);
+            return hv == null ? NotFound() : Ok(hv);
         }
 
         [HttpPut("{id}")]
