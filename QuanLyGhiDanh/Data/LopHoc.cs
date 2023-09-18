@@ -16,5 +16,9 @@ namespace PhanMemGhiDanh.Data
         public string? GioHoc { get; set; }
         public string? BatDauKetThuc { get; set; }
         public int HocPhi { get; set; }
+
+        public int IdHocVien { get; set; }
+        public HocVien? HocVien { get; set; }
+
     }
 }

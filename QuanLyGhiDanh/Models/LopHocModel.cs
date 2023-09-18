@@ -20,5 +20,8 @@ namespace QuanLyGhiDanh.Models
         public string? BatDauKetThuc { get; set; }
         [Required]
         public int HocPhi { get; set; }
+
+        [Required(ErrorMessage = "Yeu Cau Co Hoc Vien")]
+        public string? HocVien { get; set; }
     }
 }

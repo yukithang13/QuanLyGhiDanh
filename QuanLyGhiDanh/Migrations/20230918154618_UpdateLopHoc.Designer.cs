@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PhanMemGhiDanh.Data;
 
@@ -11,9 +12,10 @@ using PhanMemGhiDanh.Data;
 namespace QuanLyGhiDanh.Migrations
 {
     [DbContext(typeof(GhiDanhDbContext))]
-    partial class GhiDanhDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230918154618_UpdateLopHoc")]
+    partial class UpdateLopHoc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -31,6 +31,9 @@ builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IGiangVienService, GiangVienService>();
 builder.Services.AddScoped<IHocVienService, HocVienService>();
 builder.Services.AddScoped<IKhoaHocService, KhoaHocService>();
+builder.Services.AddScoped<ILopHocService, LopHocService>();
+builder.Services.AddScoped<IMonHocService, MonHocService>();
+builder.Services.AddScoped<INhomBoMonService, NhomBoMonService>();
 
 
 builder.Services.AddDbContext<GhiDanhDbContext>(options =>
