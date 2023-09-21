@@ -36,6 +36,21 @@ namespace QuanLyGhiDanh.Controllers
             return Mon == null ? NotFound() : Ok(Mon);
         }
 
+
+        [HttpGet("page-mon-hoc")]
+        public async Task<IActionResult> GetMonHocByPage([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            try
+            {
+                var pagedList = await _monhocServ.GetMonHocByPageAsync(pageNumber, pageSize);
+                return Ok(pagedList);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddMonHocAsync(MonHocModel monhocmodel)
         {
@@ -60,5 +75,9 @@ namespace QuanLyGhiDanh.Controllers
             await _monhocServ.DeleteMonHocAsync(id);
             return Ok();
         }
+
+
+
+
     }
 }

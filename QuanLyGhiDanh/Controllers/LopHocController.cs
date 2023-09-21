@@ -36,6 +36,20 @@ namespace QuanLyGhiDanh.Controllers
             return Lop == null ? NotFound() : Ok(Lop);
         }
 
+        [HttpGet("page-lop-hoc")]
+        public async Task<IActionResult> GetLopHocByPage([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            try
+            {
+                var pagedList = await _lophocServ.GetLopHocByPageAsync(pageNumber, pageSize);
+                return Ok(pagedList);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddLopHocAsync(LopHocModel lophocmodel)
         {

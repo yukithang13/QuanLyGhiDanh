@@ -36,6 +36,7 @@ builder.Services.AddScoped<IMonHocService, MonHocService>();
 builder.Services.AddScoped<INhomBoMonService, NhomBoMonService>();
 
 
+
 builder.Services.AddDbContext<GhiDanhDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("GhiDanh"));

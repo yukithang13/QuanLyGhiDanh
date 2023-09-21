@@ -36,6 +36,20 @@ namespace QuanLyGhiDanh.Controllers
             return kh == null ? NotFound() : Ok(kh);
         }
 
+        [HttpGet("page-khoa-hoc")]
+        public async Task<IActionResult> GetKhoaHocByPage([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            try
+            {
+                var pagedList = await _khoahocServ.GetKhoaHocByPageAsync(pageNumber, pageSize);
+                return Ok(pagedList);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddKhoaHocAsync(KhoaHocModel khoahocmodel)
         {

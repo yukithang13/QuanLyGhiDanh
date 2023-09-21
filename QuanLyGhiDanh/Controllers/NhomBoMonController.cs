@@ -36,6 +36,20 @@ namespace QuanLyGhiDanh.Controllers
             return BoMon == null ? NotFound() : Ok(BoMon);
         }
 
+        [HttpGet("page-nhom-bo-mon")]
+        public async Task<IActionResult> GetNhomBoMonByPage([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            try
+            {
+                var pagedList = await _nhombomonServ.GetNhomBoMonByPageAsync(pageNumber, pageSize);
+                return Ok(pagedList);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddNhomBoMonAsync(NhomBoMonModel nhombomonmodel)
         {

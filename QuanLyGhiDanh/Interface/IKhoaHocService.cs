@@ -1,4 +1,6 @@
-﻿using QuanLyGhiDanh.Models;
+﻿using PhanMemGhiDanh.Data;
+using QuanLyGhiDanh.Helpers;
+using QuanLyGhiDanh.Models;
 
 namespace QuanLyGhiDanh.Interface
 {
@@ -6,6 +8,7 @@ namespace QuanLyGhiDanh.Interface
     {
         Task<KhoaHocModel> GetKhoaHocByIdAsync(int id);
         Task<List<KhoaHocModel>> GetAllKhoaHocByAsync();
+        Task<PagedList<KhoaHoc>> GetKhoaHocByPageAsync(int pageNumber, int pageSize);
         Task<int> AddKhoaHocAsync(KhoaHocModel khoahocmodel);
         Task DeleteKhoaHocAsync(int id);
         Task UpdateKhoaHocAsync(int id, KhoaHocModel khoahocmodel);

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using PhanMemGhiDanh.Data;
+using QuanLyGhiDanh.Helpers;
 using QuanLyGhiDanh.Interface;
 using QuanLyGhiDanh.Models;
 
@@ -18,6 +19,7 @@ namespace QuanLyGhiDanh.Services
         }
 
 
+
         // get 1 id
         public async Task<GiangVienModel> GetGiangVienByIdAsync(int id)
         {
@@ -32,6 +34,17 @@ namespace QuanLyGhiDanh.Services
             var gvs = await _dbcontext.Giangviens.ToListAsync();
             return _mapper.Map<List<GiangVienModel>>(gvs);
         }
+
+        // Page
+        public async Task<PagedList<GiangVien>> GetGiangVienByPageAsync(int pageNumber, int pageSize)
+        {
+            var query = _dbcontext.Giangviens.AsQueryable();
+
+            var pagedList = await PagedList<GiangVien>.CreateAsync((IQueryable<GiangVien>)query, pageNumber, pageSize);
+
+            return pagedList;
+        }
+
 
         // add
         public async Task<int> AddGiangVienAsync(GiangVienModel giangvienmodel)

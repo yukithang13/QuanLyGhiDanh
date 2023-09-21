@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using PhanMemGhiDanh.Data;
+using QuanLyGhiDanh.Helpers;
 using QuanLyGhiDanh.Interface;
 using QuanLyGhiDanh.Models;
 
@@ -31,6 +32,15 @@ namespace QuanLyGhiDanh.Services
         {
             var AllLop = await _dbcontext.LopHocs.ToListAsync();
             return _mapper.Map<List<LopHocModel>>(AllLop);
+        }
+        //page
+        public async Task<PagedList<LopHoc>> GetLopHocByPageAsync(int pageNumber, int pageSize)
+        {
+            var query = _dbcontext.LopHocs.AsQueryable();
+
+            var pagedList = await PagedList<LopHoc>.CreateAsync((IQueryable<LopHoc>)query, pageNumber, pageSize);
+
+            return pagedList;
         }
 
         // add

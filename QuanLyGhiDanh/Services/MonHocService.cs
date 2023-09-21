@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using PhanMemGhiDanh.Data;
+using QuanLyGhiDanh.Helpers;
 using QuanLyGhiDanh.Interface;
 using QuanLyGhiDanh.Models;
 
@@ -31,6 +32,16 @@ namespace QuanLyGhiDanh.Services
         {
             var AllMon = await _dbcontext.Monhocs.ToListAsync();
             return _mapper.Map<List<MonHocModel>>(AllMon);
+        }
+
+        //page
+        public async Task<PagedList<Monhoc>> GetMonHocByPageAsync(int pageNumber, int pageSize)
+        {
+            var query = _dbcontext.Monhocs.AsQueryable();
+
+            var pagedList = await PagedList<Monhoc>.CreateAsync((IQueryable<Monhoc>)query, pageNumber, pageSize);
+
+            return pagedList;
         }
 
         // add
