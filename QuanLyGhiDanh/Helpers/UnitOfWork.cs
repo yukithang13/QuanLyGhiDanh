@@ -22,11 +22,12 @@ namespace QuanLyGhiDanh.Helpers
         public ILopHocService LopHocService => new LopHocService(_dbcontext, _mapper);
         public IMonHocService MonHocService => new MonHocService(_dbcontext, _mapper);
 
+
         public INhomBoMonService NhomBoMonService => new NhomBoMonService(_dbcontext, _mapper);
 
         public IAccountService AccountService => throw new NotImplementedException();
 
-        public IMonHocService IMonHocService => throw new NotImplementedException();
+
 
         public async Task<bool> Complete()
         {

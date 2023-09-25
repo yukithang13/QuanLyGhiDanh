@@ -15,18 +15,21 @@ namespace QuanLyGhiDanh.Services
         private UserManager<User> userManager;
         private SignInManager<User> signInManager;
         private IConfiguration configuration;
+        private RoleManager<IdentityRole> _roleManager;
 
-        public AccountService(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
+        public AccountService(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.configuration = configuration;
+            this._roleManager = roleManager;
         }
 
 
 
         public async Task<string> DangNhapAsync(DangNhapModel model)
         {
+
             var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
 
             if (!result.Succeeded)
@@ -64,7 +67,21 @@ namespace QuanLyGhiDanh.Services
                 UserName = model.Email,
             };
 
-            return await userManager.CreateAsync(user, model.Password);
+            var result = await userManager.CreateAsync(user, model.Password);
+
+            if (result.Succeeded)
+            {
+                var roleExists = await _roleManager.RoleExistsAsync("User");
+
+                if (!roleExists)
+                {
+                    await _roleManager.CreateAsync(new IdentityRole("User"));
+                }
+
+                await userManager.AddToRoleAsync(user, "User");
+            }
+
+            return result;
         }
     }
 }

@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using PhanMemGhiDanh.Data;
+using QuanLyGhiDanh.Helpers;
 using QuanLyGhiDanh.Interface;
 using QuanLyGhiDanh.Services;
 using System.Text;
@@ -23,7 +25,8 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddIdentity<User, IdentityRole>()
-    .AddEntityFrameworkStores<GhiDanhDbContext>().AddDefaultTokenProviders();
+    .AddEntityFrameworkStores<GhiDanhDbContext>().AddDefaultTokenProviders()
+    .AddRoleManager<RoleManager<IdentityRole>>(); ;
 
 
 builder.Services.AddAutoMapper(typeof(Program));
@@ -34,7 +37,7 @@ builder.Services.AddScoped<IKhoaHocService, KhoaHocService>();
 builder.Services.AddScoped<ILopHocService, LopHocService>();
 builder.Services.AddScoped<IMonHocService, MonHocService>();
 builder.Services.AddScoped<INhomBoMonService, NhomBoMonService>();
-
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
 builder.Services.AddDbContext<GhiDanhDbContext>(options =>
@@ -55,17 +58,44 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("RequireUserRole", policy =>
         policy.RequireRole("User"));
 
-    options.AddPolicy("RequireUserRole", policy =>
+    options.AddPolicy("RequireTeacherRole", policy =>
         policy.RequireRole("Teacher"));
 
     options.AddPolicy("RequireAdminRole", policy =>
         policy.RequireRole("AdminRole"));
 
-    // Add role here....
-
+    // Thêm các ủy quyền khác ở đây....
 });
 
 //--------------------------------------------------------------------------------------------------
+builder.Services.AddSwaggerGen(sw =>
+{
+    sw.SwaggerDoc("v1", new OpenApiInfo { Title = "JWT", Version = "v1" });
+    sw.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "Jwt Authorization",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+    sw.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[]{}
+        }
+
+    });
+
+}); // Bearer [Token]
 
 
 
@@ -107,6 +137,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
 
 app.MapControllers();
 

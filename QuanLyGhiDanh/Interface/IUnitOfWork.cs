@@ -8,7 +8,7 @@
         IHocVienService HocVienService { get; }
         IKhoaHocService KhoaHocService { get; }
         ILopHocService LopHocService { get; }
-        IMonHocService IMonHocService { get; }
+        IMonHocService MonHocService { get; }
         INhomBoMonService NhomBoMonService { get; }
 
 
