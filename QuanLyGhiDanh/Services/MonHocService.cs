@@ -44,6 +44,22 @@ namespace QuanLyGhiDanh.Services
             return pagedList;
         }
 
+        // search
+        public async Task<PagedList<Monhoc>> FindMonHocByPageAsync(int pageNumber, int pageSize, string searchString = "")
+        {
+            var query = _dbcontext.Monhocs.AsQueryable();
+
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(g => g.TenMon.Contains(searchString));
+            }
+
+            var pagedList = await PagedList<Monhoc>.CreateAsync(query, pageNumber, pageSize);
+
+            return pagedList;
+        }
+
         // add
         public async Task<int> AddMonHocAsync(MonHocModel monhocmodel)
         {

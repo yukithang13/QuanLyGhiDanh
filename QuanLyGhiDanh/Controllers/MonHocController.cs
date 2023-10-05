@@ -36,6 +36,21 @@ namespace QuanLyGhiDanh.Controllers
             return Mon == null ? NotFound() : Ok(Mon);
         }
 
+        [HttpGet("search-mon-hoc")]
+        public async Task<IActionResult> FindGiangVienByPageAsync([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10, string searchString = "") // default 1-10 size
+        {
+            try
+            {
+                var pagedList = await _monhocServ.FindMonHocByPageAsync(pageNumber, pageSize, searchString);
+                return Ok(pagedList);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
 
         [HttpGet("page-mon-hoc")]
         public async Task<IActionResult> GetMonHocByPage([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)

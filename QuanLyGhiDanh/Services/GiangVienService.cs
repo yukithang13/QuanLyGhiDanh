@@ -44,7 +44,21 @@ namespace QuanLyGhiDanh.Services
 
             return pagedList;
         }
+        // search
+        public async Task<PagedList<GiangVien>> FindGiangVienByPageAsync(int pageNumber, int pageSize, string searchString = "")
+        {
+            var query = _dbcontext.Giangviens.AsQueryable();
 
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(g => g.HoTenGV.Contains(searchString) || g.MonGiangDay.Contains(searchString));
+            }
+
+            var pagedList = await PagedList<GiangVien>.CreateAsync(query, pageNumber, pageSize);
+
+            return pagedList;
+        }
 
         // add
         public async Task<int> AddGiangVienAsync(GiangVienModel giangvienmodel)

@@ -44,6 +44,23 @@ namespace QuanLyGhiDanh.Services
             return pagedList;
         }
 
+        // search
+        public async Task<PagedList<HocVien>> FindHocVienByPageAsync(int pageNumber, int pageSize, string searchString = "")
+        {
+            var query = _dbcontext.HocViens.AsQueryable();
+
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(g => g.TenHV.Contains(searchString) || g.TenNguoiGiamHo.Contains(searchString));
+            }
+
+            var pagedList = await PagedList<HocVien>.CreateAsync(query, pageNumber, pageSize);
+
+            return pagedList;
+        }
+
+
         // add
         public async Task<int> AddHocVienAsync(HocVienModel hocvienmodel)
         {

@@ -58,6 +58,23 @@ namespace QuanLyGhiDanh.Controllers
             return hv == null ? NotFound() : Ok(hv);
         }
 
+
+
+
+        [HttpGet("search-hoc-vien")]
+        public async Task<IActionResult> FindHocVienByPageAsync([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10, string searchString = "") // default 1-10 size
+        {
+            try
+            {
+                var pagedList = await _hocvienServ.FindHocVienByPageAsync(pageNumber, pageSize, searchString);
+                return Ok(pagedList);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateHocVienAsync(int id, [FromBody] HocVienModel hocvienmodel)
         {

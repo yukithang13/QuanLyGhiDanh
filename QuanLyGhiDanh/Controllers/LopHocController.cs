@@ -50,6 +50,20 @@ namespace QuanLyGhiDanh.Controllers
             }
         }
 
+        [HttpGet("search-lop-hoc")]
+        public async Task<IActionResult> FindLopHocByPageAsync([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10, string searchString = "") // default 1-10 size
+        {
+            try
+            {
+                var pagedList = await _lophocServ.FindLopHocByPageAsync(pageNumber, pageSize, searchString);
+                return Ok(pagedList);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddLopHocAsync(LopHocModel lophocmodel)
         {

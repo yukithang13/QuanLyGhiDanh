@@ -43,6 +43,22 @@ namespace QuanLyGhiDanh.Services
             return pagedList;
         }
 
+        // search
+        public async Task<PagedList<KhoaHoc>> FindKhoaHocByPageAsync(int pageNumber, int pageSize, string searchString = "")
+        {
+            var query = _dbcontext.Khoahocs.AsQueryable();
+
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(g => g.TenKhoaHoc.Contains(searchString));
+            }
+
+            var pagedList = await PagedList<KhoaHoc>.CreateAsync(query, pageNumber, pageSize);
+
+            return pagedList;
+        }
+
         // add
         public async Task<int> AddKhoaHocAsync(KhoaHocModel khoahocmodel)
         {

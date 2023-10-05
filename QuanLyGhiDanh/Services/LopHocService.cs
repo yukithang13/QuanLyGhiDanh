@@ -43,6 +43,23 @@ namespace QuanLyGhiDanh.Services
             return pagedList;
         }
 
+
+        // search
+        public async Task<PagedList<LopHoc>> FindLopHocByPageAsync(int pageNumber, int pageSize, string searchString = "")
+        {
+            var query = _dbcontext.LopHocs.AsQueryable();
+
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(g => g.TenLop.Contains(searchString));
+            }
+
+            var pagedList = await PagedList<LopHoc>.CreateAsync(query, pageNumber, pageSize);
+
+            return pagedList;
+        }
+
         // add
         public async Task<int> AddLopHocAsync(LopHocModel lophocmodel)
         {

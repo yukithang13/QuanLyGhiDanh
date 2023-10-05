@@ -51,6 +51,20 @@ namespace QuanLyGhiDanh.Controllers
         }
 
 
+
+        [HttpGet("search-giang-vien")]
+        public async Task<IActionResult> FindGiangVienByPageAsync([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10, string searchString = "") // default 1-10 size
+        {
+            try
+            {
+                var pagedList = await _giangvienServ.FindGiangVienByPageAsync(pageNumber, pageSize, searchString);
+                return Ok(pagedList);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
         [HttpPost]
         public async Task<IActionResult> AddGiangVienAsync(GiangVienModel giangvienmodel)
         {
