@@ -25,7 +25,7 @@ namespace QuanLyGhiDanh.Controllers
 
 
         //[Authorize(Roles = "Admin"]
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("giang-vien/get-all")]
         public async Task<IActionResult> GetAllGiangVienByAsync()
         {
@@ -41,7 +41,7 @@ namespace QuanLyGhiDanh.Controllers
         }
 
         //[Authorize(Policy = "AdminRole")]
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("giang-vien/get/{id}")]
         public async Task<IActionResult> GetGiangVienByIdAsync(int id)
         {
@@ -49,7 +49,7 @@ namespace QuanLyGhiDanh.Controllers
             return gv == null ? NotFound() : Ok(gv);
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("giang-vien/get-page")]
         public async Task<IActionResult> GetGiangVienByPage([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10) // default 1-10 size
         {
@@ -64,7 +64,7 @@ namespace QuanLyGhiDanh.Controllers
             }
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpPost("giang-vien/add/{id}")]
         public async Task<IActionResult> AddGiangVienAsync(GiangVienModel giangvienmodel)
         {
@@ -73,7 +73,7 @@ namespace QuanLyGhiDanh.Controllers
             return gv == null ? NotFound() : Ok(gv);
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpPut("giang-vien/update/{id}")]
         public async Task<IActionResult> UpdateGiangVienAsync(int id, [FromBody] GiangVienModel giangvienmodel)
         {
@@ -85,7 +85,7 @@ namespace QuanLyGhiDanh.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("giang-vien/delete/{id}")]
         public async Task<IActionResult> DeleteGiangVienAsync([FromBody] int id)
         {
@@ -93,7 +93,7 @@ namespace QuanLyGhiDanh.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("hoc-vien/get-all/{id}")]
         public async Task<IActionResult> GetAllHocVienByAsync()
         {
@@ -108,7 +108,7 @@ namespace QuanLyGhiDanh.Controllers
             }
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("hoc-vien/get/{id}")]
         public async Task<IActionResult> GetHocVienByIdAsync(int id)
         {
@@ -116,7 +116,7 @@ namespace QuanLyGhiDanh.Controllers
             return hv == null ? NotFound() : Ok(hv);
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("hoc-vien/get-page")]
         public async Task<IActionResult> GetHocVienByPage([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
@@ -131,7 +131,7 @@ namespace QuanLyGhiDanh.Controllers
             }
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpPost("hoc-vien/add")]
         public async Task<IActionResult> AddHocVienAsync(HocVienModel hocvienmodel)
         {
@@ -140,7 +140,7 @@ namespace QuanLyGhiDanh.Controllers
             return hv == null ? NotFound() : Ok(hv);
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpPut("hoc-vien/update/{id}")]
         public async Task<IActionResult> UpdateHocVienAsync(int id, [FromBody] HocVienModel hocvienmodel)
         {
@@ -152,7 +152,7 @@ namespace QuanLyGhiDanh.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("hoc-vien/delete/{id}")]
         public async Task<IActionResult> DeleteHocVienAsync([FromBody] int id)
         {
@@ -162,7 +162,7 @@ namespace QuanLyGhiDanh.Controllers
 
         //Khoa hoc
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("khoa-hoc/get-all")]
         public async Task<IActionResult> GetAllKhoaHoc()
         {
@@ -177,7 +177,7 @@ namespace QuanLyGhiDanh.Controllers
             }
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("khoa-hoc/get/{id}")]
         public async Task<IActionResult> GetKhoaHocByIdAsync(int id)
         {
@@ -185,7 +185,7 @@ namespace QuanLyGhiDanh.Controllers
             return kh == null ? NotFound() : Ok(kh);
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("khoa-hoc/get-page")]
         public async Task<IActionResult> GetKhoaHocByPage([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
@@ -201,7 +201,7 @@ namespace QuanLyGhiDanh.Controllers
         }
 
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpPost("khoa-hoc/add")]
         public async Task<IActionResult> AddKhoaHocAsync(KhoaHocModel khoahocmodel)
         {
@@ -210,7 +210,7 @@ namespace QuanLyGhiDanh.Controllers
             return kh == null ? NotFound() : Ok(kh);
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpPut("khoa-hoc/update/{id}")]
         public async Task<IActionResult> UpdateKhoaHocAsync(int id, [FromBody] KhoaHocModel khoahocmodel)
         {
@@ -222,7 +222,7 @@ namespace QuanLyGhiDanh.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("khoa-hoc/delete/{id}")]
         public async Task<IActionResult> DeleteKhoaHocAsync([FromBody] int id)
         {
@@ -246,7 +246,7 @@ namespace QuanLyGhiDanh.Controllers
             }
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("lop-hoc/get/{id}")]
         public async Task<IActionResult> GetLopHocByIdAsync(int id)
         {
@@ -254,7 +254,7 @@ namespace QuanLyGhiDanh.Controllers
             return Lop == null ? NotFound() : Ok(Lop);
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("lop-hoc/get-page")]
         public async Task<IActionResult> GetLopHocByPage([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
@@ -269,7 +269,7 @@ namespace QuanLyGhiDanh.Controllers
             }
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpPost("lop-hoc/add")]
         public async Task<IActionResult> AddLopHocAsync(LopHocModel lophocmodel)
         {
@@ -278,7 +278,7 @@ namespace QuanLyGhiDanh.Controllers
             return Lop == null ? NotFound() : Ok(Lop);
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpPut("lop-hoc/update/{id}")]
         public async Task<IActionResult> UpdateLopHocAsync(int id, [FromBody] LopHocModel lophocmodel)
         {
@@ -290,7 +290,7 @@ namespace QuanLyGhiDanh.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("lop-hoc/delete/{id}")]
         public async Task<IActionResult> DeleteLopHocAsync([FromBody] int id)
         {
@@ -300,7 +300,7 @@ namespace QuanLyGhiDanh.Controllers
 
         // monhoc
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("mon-hoc/get-all")]
         public async Task<IActionResult> GetAllMonHoc()
         {
@@ -315,7 +315,7 @@ namespace QuanLyGhiDanh.Controllers
             }
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("mon-hoc/get/{id}")]
         public async Task<IActionResult> GetMonHocByIdAsync(int id)
         {
@@ -323,7 +323,7 @@ namespace QuanLyGhiDanh.Controllers
             return Mon == null ? NotFound() : Ok(Mon);
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("mon-hoc/get-page")]
         public async Task<IActionResult> GetMonHocByPage([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
@@ -338,7 +338,7 @@ namespace QuanLyGhiDanh.Controllers
             }
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpPost("mon-hoc/add")]
         public async Task<IActionResult> AddMonHocAsync(MonHocModel monhocmodel)
         {
@@ -347,7 +347,7 @@ namespace QuanLyGhiDanh.Controllers
             return Mon == null ? NotFound() : Ok(Mon);
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpPut("mon-hoc/update/{id}")]
         public async Task<IActionResult> UpdateMonHocAsync(int id, [FromBody] MonHocModel monhocmodel)
         {
@@ -359,7 +359,7 @@ namespace QuanLyGhiDanh.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("mon-hoc/delete/{id}")]
         public async Task<IActionResult> DeleteMonHocAsync([FromBody] int id)
         {
@@ -368,7 +368,7 @@ namespace QuanLyGhiDanh.Controllers
         }
 
         // nhom bo mon
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("nhom-bo-mon/get-all")]
         public async Task<IActionResult> GetAllNhomBoMon()
         {
@@ -383,7 +383,7 @@ namespace QuanLyGhiDanh.Controllers
             }
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("nhom-bo-mon/get/{id}")]
         public async Task<IActionResult> GetNhomBoMonByIdAsync(int id)
         {
@@ -391,7 +391,7 @@ namespace QuanLyGhiDanh.Controllers
             return BoMon == null ? NotFound() : Ok(BoMon);
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("nhom-bo-mon/get-page")]
         public async Task<IActionResult> GetNhomBoMonByPage([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
@@ -406,7 +406,7 @@ namespace QuanLyGhiDanh.Controllers
             }
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpPost("nhom-bo-mon/add")]
         public async Task<IActionResult> AddNhomBoMonAsync(NhomBoMonModel nhombomonmodel)
         {
@@ -415,7 +415,7 @@ namespace QuanLyGhiDanh.Controllers
             return BoMon == null ? NotFound() : Ok(BoMon);
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpPut("nhom-bo-mon/update/{id}")]
         public async Task<IActionResult> UpdateNhomBoMonAsync(int id, [FromBody] NhomBoMonModel nhombomonmodel)
         {
@@ -427,7 +427,7 @@ namespace QuanLyGhiDanh.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("nhom-bo-mon/delete/{id}")]
         public async Task<IActionResult> DeleteNhomBoMonAsync([FromBody] int id)
         {
